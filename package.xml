@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>catkin_template</name>
+  <version>0.0.0</version>
+  <description>Description of the package goes here.</description>
+
+  <maintainer email="safin.ramil@it.kfu.ru">Safin Ramil</maintainer>
+
+  <license>MIT</license>
+
+  <url type="repository">https://github.com/PhD-Thesis-2024/catkin-project-template</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>message_runtime</depend>
+  <depend>message_generation</depend>
+
+  <depend>roslib</depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!--
+      Example:
+        <gazebo gazebo_media_path="${prefix}"/>
+        <gazebo_ros gazebo_model_path="${prefix}/models"/>
+    -->
+  </export>
+</package>
