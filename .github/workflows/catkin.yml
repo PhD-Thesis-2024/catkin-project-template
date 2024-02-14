@@ -1,0 +1,36 @@
+name: Build and Test on ROS Noetic Ninjemys
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: "osrf/ros:noetic-ros-base"
+      env: 
+        ROS_DISTRO: noetic
+        BUILD_TYPE: Release
+
+    defaults:
+      run: {shell: bash}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        path: src
+        submodules: recursive
+
+    - name: Install APT dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install python3-catkin-tools
+
+    - name: Build catkin package
+      run: |
+        source /opt/ros/$ROS_DISTRO/setup.bash
+        catkin build --jobs 2 --cmake-args -DBUILD_TYPE=$BUILD_TYPE
