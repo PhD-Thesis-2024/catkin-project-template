@@ -8,7 +8,7 @@ Template of catkin package for C++ and Python projects in ROS (Robot Operating S
 
 Includes basic examples of pub/sub, custom messages and services, and dynamic reconfigure. Provides project structure and build/test pipeline using [GitHub workflows](.github/workflows). 
 
-Start your journey by clicking ["Use this template"](https://github.com/new?template_name=catkin-project-template&template_owner=PhD-Thesis-2024)!
+Start your journey by clicking [Use this template](https://github.com/new?template_name=catkin-project-template&template_owner=PhD-Thesis-2024).
 
 <p align="center">
   <img src="https://github.com/PhD-Thesis-2024/catkin-project-template/assets/11016580/b7e3c0bc-7cb9-47b5-bc20-747b4f001b86" width="75%"/>  
