@@ -11,9 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: "osrf/ros:noetic-ros-base"
-      env: 
-        ROS_DISTRO: noetic
+      image: "library/ros:noetic-ros-base"
+      env:
         BUILD_TYPE: Release
 
     defaults:
@@ -28,9 +27,8 @@ jobs:
     - name: Install APT dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install python3-catkin-tools
+        sudo apt-get install -y -qq python3-catkin-tools
 
     - name: Build catkin package
       run: |
-        source /opt/ros/$ROS_DISTRO/setup.bash
         catkin build --jobs 2 --cmake-args -DBUILD_TYPE=$BUILD_TYPE
