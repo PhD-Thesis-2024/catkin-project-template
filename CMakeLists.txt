@@ -9,10 +9,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(catkin REQUIRED COMPONENTS
   rospy
   roscpp
-  roslib
   std_msgs
   message_runtime
   message_generation
+  dynamic_reconfigure
 )
 
 catkin_python_setup()
@@ -61,10 +61,9 @@ generate_messages(
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder.
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/Config.cfg
+)
 
 ## catkin specific configuration.
 ##
@@ -77,7 +76,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
   # LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp rospy roslib std_msgs message_runtime message_generation
+  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime message_generation dynamic_reconfigure
 )
 
 ## Declare a catkin interface target.
@@ -87,7 +86,7 @@ target_link_libraries(catkin_deps INTERFACE ${catkin_LIBRARIES})
 target_include_directories(catkin_deps INTERFACE ${catkin_INCLUDE_DIRS})
 
 ## Note: pre-build messages, services, actions.
-add_dependencies(catkin_deps ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
+add_dependencies(catkin_deps ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 
 ## Declare a C++ executables (targets).
 
@@ -105,6 +104,10 @@ target_link_libraries(cpp_service_server PRIVATE catkin_deps)
 
 add_executable(cpp_service_client src/service_client.cpp)
 target_link_libraries(cpp_service_client PRIVATE catkin_deps)
+
+## Cfg
+add_executable(cpp_cfg_server src/cfg_server.cpp)
+target_link_libraries(cpp_cfg_server PRIVATE catkin_deps)
 
 ## Testing.
 ## Coming soon ...
