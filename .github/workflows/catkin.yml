@@ -32,6 +32,7 @@ jobs:
       working-directory: ${{GITHUB.WORKSPACE}}/workspace
       run: |
         source /opt/ros/$ROS_DISTRO/setup.bash
+        rosdep update
         rosdep install --from-paths src --ignore-src -y
 
     - name: Build catkin workspace
