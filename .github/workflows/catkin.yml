@@ -31,4 +31,5 @@ jobs:
     - name: Build catkin package
       working-directory: ${{GITHUB.WORKSPACE}}
       run: |
+        source /opt/ros/$ROS_DISTRO/setup.bash
         catkin build --jobs 2 --cmake-args -DBUILD_TYPE=$BUILD_TYPE
