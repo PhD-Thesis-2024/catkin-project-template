@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        path: src
+        path: ${{GITHUB.WORKSPACE}}/src
 
     - name: Install APT dependencies
       run: |
@@ -29,5 +29,6 @@ jobs:
         sudo apt-get install -y -qq python3-catkin-tools
 
     - name: Build catkin package
+      working-directory: ${{GITHUB.WORKSPACE}}
       run: |
         catkin build --jobs 2 --cmake-args -DBUILD_TYPE=$BUILD_TYPE
