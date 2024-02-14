@@ -81,16 +81,30 @@ catkin_package(
 )
 
 ## Declare a catkin interface target.
+## Note: link against this target to include catkin libraries and link catkin directories.
 add_library(catkin_deps INTERFACE)
 target_link_libraries(catkin_deps INTERFACE ${catkin_LIBRARIES})
 target_include_directories(catkin_deps INTERFACE ${catkin_INCLUDE_DIRS})
 
-## Declare a C++ executable (ROS node).
-add_executable(cpp_node src/cpp_node.cpp)
-target_link_libraries(cpp_node PRIVATE catkin_deps)
+## Note: pre-build messages, services, actions.
+add_dependencies(catkin_deps ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
-## Generate ROS messages, service and actions beforehand.
-add_dependencies(cpp_node ${catkin_EXPORTED_TARGETS})
+## Declare a C++ executables (targets).
+
+## Publisher
+add_executable(cpp_publisher src/publisher.cpp)
+target_link_libraries(cpp_publisher PRIVATE catkin_deps)
+
+## Subscriber
+add_executable(cpp_subscriber src/subscriber.cpp)
+target_link_libraries(cpp_subscriber PRIVATE catkin_deps)
+
+## Service
+add_executable(cpp_service_server src/service_server.cpp)
+target_link_libraries(cpp_service_server PRIVATE catkin_deps)
+
+add_executable(cpp_service_client src/service_client.cpp)
+target_link_libraries(cpp_service_client PRIVATE catkin_deps)
 
 ## Testing.
 ## Coming soon ...
