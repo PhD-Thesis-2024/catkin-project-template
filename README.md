@@ -69,7 +69,7 @@ rosrun catkin_template cpp_subscriber [message:=<topic-remapping>]
 
 #### 3. Service
 
-Start ROS service server (uses [Service.srv](srv/Service.srv), endpoint = `/service`):
+Run ROS service server (uses [Service.srv](srv/Service.srv), endpoint = `/service`):
 ```shell
 rosrun catkin_template cpp_service_server [service:=<endpoint-remapping>]
 ```
