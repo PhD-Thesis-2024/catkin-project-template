@@ -35,7 +35,7 @@ catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin config --jobs $(nproc)
 ```
 
-3. Build (forcing CMake to run)
+3. Build (forcing CMake to run, no cache):
 ```shell
 catkin build --force-cmake
 ```
@@ -53,26 +53,22 @@ Now, you're ready to get going!
 ```shell
 roslaunch catkin_template example.launch [ns:=<your-namespace>] [remap_to:=<your-remapping>]
 ```
-In this example we demonstate:
-- launch file arguments
-- topic remapping
-- namespace encapsulation
 
 2. Publisher/subscriber:
 
-Start ROS publisher (publish [`Message.msg`](msg/Message.msg) to `/message`):
+Run ROS publisher (publishes [`Message.msg`](msg/Message.msg) to `/message` by default):
 ```shell
 rosrun catkin_template cpp_publisher [message:=<topic-remapping>]
 ```
 
-Start ROS subscriber:
+Run ROS subscriber (subscribes to `/message` by default):
 ```shell
 rosrun catkin_template cpp_subscriber [message:=<topic-remapping>]
 ```
 
 3. Service
 
-Start ROS service server (uses custom [Service.srv](srv/Service.srv), endpoint = `/service`):
+Start ROS service server (uses [Service.srv](srv/Service.srv), endpoint = `/service`):
 ```shell
 rosrun catkin_template cpp_service_server [service:=<endpoint-remapping>]
 ```
@@ -92,3 +88,7 @@ Check reconfiguration server using RQT:
 ```shell
 rosrun rqt_reconfigure rqt_reconfigure
 ```
+
+### Tests
+
+Coming soon ...
