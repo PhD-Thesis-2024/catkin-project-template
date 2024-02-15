@@ -36,7 +36,7 @@ def main() -> None:
 
     # publish message
     publisher.publish(msg)
-    
+
     pub_rate.sleep()
 
 

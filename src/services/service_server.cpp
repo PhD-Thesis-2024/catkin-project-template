@@ -18,7 +18,7 @@ bool handler(catkin_template::ServiceRequest& req, catkin_template::ServiceRespo
 }
 
 int main(int argc, char **argv) {
-  
+
   // initialize ROS Node
   ros::init(argc, argv, kNodeName);
 

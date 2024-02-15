@@ -14,7 +14,7 @@ static constexpr auto kPubQueueSize = std::uint32_t{10};
 
 
 int main(int argc, char **argv) {
-  
+
   // initialize ROS Node
   ros::init(argc, argv, kNodeName);
 

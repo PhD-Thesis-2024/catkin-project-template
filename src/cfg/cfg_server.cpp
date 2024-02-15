@@ -13,15 +13,15 @@ static constexpr auto kNodeName = "cpp_cfg_server";
 
 
 void callback(catkin_template::ConfigConfig& config, std::uint32_t level) {
-  ROS_INFO("Reconfigure: %d, %.1f, %s, %s, %d",
+  ROS_INFO("Reconfigure: %d, %.1f, %s, %s, %d, level = %d",
            config.int_param, config.double_param, config.str_param.data(),
-           config.bool_param? "True":"False", config.size);
-  
+           config.bool_param? "True":"False", config.size, level);
+
   // validation ...
 }
 
 int main(int argc, char **argv) {
-  
+
   // initialize ROS Node
   ros::init(argc, argv, kNodeName);
 

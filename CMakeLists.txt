@@ -6,20 +6,21 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Options.
+option(CATKIN_ENABLE_TESTING "Build tests." ON)
+option(WARNINGS_AS_ERRORS "Treat warnings as errors." OFF)
+option(ENABLE_COMPILER_WARNINGS "Enable compile warnings." ON)
+
 # Helpers.
 include(CMakePrintHelpers)
 include(cmake/CompilerWarnings.cmake)
 
-# Options.
-option(BUILD_TESTS "Build project tests." OFF)
-option(ENABLE_COMPILER_WARNINGS "Project compile warnings." ON)
-option(ENABLE_MEMCHECK "Configure project for memory checking." OFF)
-
-cmake_print_variables(CMAKE_BUILD_TYPE BUILD_TESTS ENABLE_COMPILER_WARNINGS WARNINGS_AS_ERRORS)
+cmake_print_variables(CMAKE_BUILD_TYPE CATKIN_ENABLE_TESTING ENABLE_COMPILER_WARNINGS WARNINGS_AS_ERRORS)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
   roscpp
+  roslib
   std_msgs
   message_runtime
   message_generation
@@ -85,7 +86,7 @@ generate_dynamic_reconfigure_options(
 catkin_package(
   INCLUDE_DIRS include
   # LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime message_generation dynamic_reconfigure
+  CATKIN_DEPENDS roscpp rospy roslib std_msgs message_runtime message_generation dynamic_reconfigure
 )
 
 ## Declare catkin interface target.
@@ -108,23 +109,26 @@ endif (ENABLE_COMPILER_WARNINGS)
 ## Declare a C++ executables (targets).
 
 ## Publisher
-add_executable(cpp_publisher src/publisher.cpp)
+add_executable(cpp_publisher src/nodes/publisher.cpp)
 target_link_libraries(cpp_publisher PRIVATE catkin_deps)
 
 ## Subscriber
-add_executable(cpp_subscriber src/subscriber.cpp)
+add_executable(cpp_subscriber src/nodes/subscriber.cpp)
 target_link_libraries(cpp_subscriber PRIVATE catkin_deps)
 
 ## Service
-add_executable(cpp_service_server src/service_server.cpp)
+add_executable(cpp_service_server src/services/service_server.cpp)
 target_link_libraries(cpp_service_server PRIVATE catkin_deps)
 
-add_executable(cpp_service_client src/service_client.cpp)
+add_executable(cpp_service_client src/services/service_client.cpp)
 target_link_libraries(cpp_service_client PRIVATE catkin_deps)
 
 ## Cfg
-add_executable(cpp_cfg_server src/cfg_server.cpp)
+add_executable(cpp_cfg_server src/cfg/cfg_server.cpp)
 target_link_libraries(cpp_cfg_server PRIVATE catkin_deps)
 
 ## Testing.
-## Coming soon ...
+if (CATKIN_ENABLE_TESTING)
+  include(CTest)
+  add_subdirectory(tests)
+endif (CATKIN_ENABLE_TESTING)

@@ -27,7 +27,7 @@ catkin config --init --extend /opt/ros/noetic
 
 2. Optinally, configure your workspace (CMake args, parallel jobs, etc.):
 ```shell
-catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release -DCATKIN_ENABLE_TESTING=ON
 catkin config --jobs $(nproc)
 ```
 
@@ -45,7 +45,38 @@ Now, you're ready to get going!
 
 ### Tests
 
-Coming soon ...
+Catkin can run C++ unit tests using the [GoogleTest](https://github.com/google/googletest) library in C++ and the [nosetest](https://nose.readthedocs.io/en/latest/index.html) utility in Python.
+
+Before continuing any further, make sure `CATKIN_ENABLE_TESTING` CMake variables is `ON` (it is by default).
+
+### C++
+
+C++ tests can be written in two ways:
+- [GoogleTest](https://github.com/google/googletest) library (integrate into ROS).
+- [Catch2](https://github.com/catchorg/Catch2) framework (v3) (external dependency).
+
+Run Catch2 unit tests:
+```shell
+# option 1: run tests using rosrun
+rosrun catkin_template run_catch_tests
+
+# option 2: run tests using cTest (verbose output)
+cd build/catkin_template
+ctest
+```
+
+or run GoogleTest unit tests:
+```shell
+catkin test catkin_template [-t run_tests]
+```
+
+### Python
+
+Python tests can be written using [nosetests](https://nose.readthedocs.io/en/latest/index.html).
+
+```shell
+catkin test catkin_template
+```
 
 ### Usage
 

@@ -14,7 +14,7 @@ static constexpr auto kTimeoutSecs = double{5.0};
 
 
 int main(int argc, char **argv) {
-  
+
   // initialize ROS Node
   ros::init(argc, argv, kNodeName);
 

@@ -25,14 +25,14 @@ def main() -> None:
   # wait for service to be available
   rospy.wait_for_service(SERVICE_NAME, rospy.Duration(SERVICE_TIMEOUT_SECS))
 
-  # create proxy to call service 
+  # create proxy to call service
   service = rospy.ServiceProxy(SERVICE_NAME, Service)
 
   try:
     # execute service call
     resp: ServiceResponse = service(request = 'py::service::request')
     rospy.loginfo(f"Service call to '{rospy.resolve_name(SERVICE_NAME)} returned response = '{resp.response}'")
-  
+
   except rospy.ServiceException:
     rospy.logerr(f"Failed to call service '{rospy.resolve_name(SERVICE_NAME)}'")
 

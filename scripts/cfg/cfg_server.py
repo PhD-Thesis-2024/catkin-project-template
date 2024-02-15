@@ -17,7 +17,7 @@ NODE_NAME: Final[str] = 'py_cfg_server'
 def callback(config: ConfigConfig, _) -> ConfigConfig:
   rospy.loginfo("Reconfigure: {int_param}, {double_param}, {str_param}, {bool_param}, {size}".format(**config))
 
-  # config validation ... 
+  # config validation ...
 
   return config
 
@@ -28,7 +28,7 @@ def main() -> None:
   rospy.init_node(NODE_NAME, sys.argv)
 
   server = Server(ConfigConfig, callback)
-  
+
   rospy.spin()
 
 

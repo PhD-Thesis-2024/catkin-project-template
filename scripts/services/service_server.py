@@ -7,7 +7,7 @@ from typing import Final
 import rospy
 
 # custom service
-from catkin_template.srv import Service, ServiceRequest, ServiceResponse 
+from catkin_template.srv import Service, ServiceRequest, ServiceResponse
 
 # constants
 NODE_NAME: Final[str] = 'py_service_server'
