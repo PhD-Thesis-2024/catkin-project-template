@@ -47,6 +47,6 @@ jobs:
       working-directory: ${{GITHUB.WORKSPACE}}/workspace
       run: |
         source /opt/ros/$ROS_DISTRO/setup.bash
-        source ${{GITHUB.WORKSPACE}}/workspace/devel/setup.bash
+        source devel/setup.bash
         cd ${{GITHUB.WORKSPACE}}/workspace/build/catkin_template
         ctest -V
