@@ -47,14 +47,19 @@ source devel/setup.bash
 
 Now, you're ready to get going!
 
+### Tests
+
+Coming soon ...
+
 ### Usage
 
-1. Launch file:
+#### 1. Launch file
+
 ```shell
 roslaunch catkin_template example.launch [ns:=<your-namespace>] [remap_to:=<your-remapping>]
 ```
 
-2. Publisher/subscriber:
+#### 2. Publisher/subscriber
 
 Run ROS publisher (publishes [`Message.msg`](msg/Message.msg) to `/message` by default):
 ```shell
@@ -66,7 +71,7 @@ Run ROS subscriber (subscribes to `/message` by default):
 rosrun catkin_template cpp_subscriber [message:=<topic-remapping>]
 ```
 
-3. Service
+#### 3. Service
 
 Start ROS service server (uses [Service.srv](srv/Service.srv), endpoint = `/service`):
 ```shell
@@ -78,7 +83,7 @@ Call service `/service`:
 rosservice call /service "request: '<data>'"
 ```
 
-4. Dynamic reconfigure:
+#### 4. Dynamic reconfigure
 
 ```shell
 rosrun catkin_template cpp_cfg_server
@@ -88,7 +93,3 @@ Check reconfiguration server using RQT:
 ```shell
 rosrun rqt_reconfigure rqt_reconfigure
 ```
-
-### Tests
-
-Coming soon ...
