@@ -28,7 +28,7 @@ jobs:
     - name: Install APT dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y -qq python3-catkin-tools
+        sudo apt-get install -y -qq git python3-catkin-tools
 
     - name: Install ROS dependencies
       working-directory: ${{GITHUB.WORKSPACE}}/workspace
