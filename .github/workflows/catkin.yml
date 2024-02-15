@@ -3,8 +3,10 @@ name: ROS Noetic Ninjemys
 on:
   push:
     branches: [ "main", "master" ]
+    paths-ignore: ['README.md', 'LICENSE']
   pull_request:
     branches: [ "main", "master" ]
+    paths-ignore: ['README.md', 'LICENSE']
 
 jobs:
   build:
