@@ -6,6 +6,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Helpers.
+include(CMakePrintHelpers)
+include(cmake/CompilerWarnings.cmake)
+
+# Options.
+option(BUILD_TESTS "Build project tests." OFF)
+option(ENABLE_COMPILER_WARNINGS "Project compile warnings." ON)
+option(ENABLE_MEMCHECK "Configure project for memory checking." OFF)
+
+cmake_print_variables(CMAKE_BUILD_TYPE BUILD_TESTS ENABLE_COMPILER_WARNINGS WARNINGS_AS_ERRORS)
+
 find_package(catkin REQUIRED COMPONENTS
   rospy
   roscpp
@@ -21,8 +32,6 @@ catkin_python_setup()
 # find_package(Boost REQUIRED COMPONENTS system)
 
 ## Declare ROS messages, services and actions.
-##
-## To declare and build messages, services or actions from within this package, follow these steps:
 
 ## Generate messages in the 'msg' folder.
 add_message_files(
@@ -79,14 +88,22 @@ catkin_package(
   CATKIN_DEPENDS roscpp rospy std_msgs message_runtime message_generation dynamic_reconfigure
 )
 
-## Declare a catkin interface target.
-## Note: link against this target to include catkin libraries and link catkin directories.
+## Declare catkin interface target.
+## Link against this target to include catkin libraries and link catkin directories.
 add_library(catkin_deps INTERFACE)
 target_link_libraries(catkin_deps INTERFACE ${catkin_LIBRARIES})
-target_include_directories(catkin_deps INTERFACE ${catkin_INCLUDE_DIRS})
+target_include_directories(catkin_deps SYSTEM INTERFACE ${catkin_INCLUDE_DIRS})
 
-## Note: pre-build messages, services, actions.
+## Pre-build messages, services, actions.
 add_dependencies(catkin_deps ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+
+## Declare compiler warnings interface target.
+add_library(enable_compiler_warnings INTERFACE)
+
+if (ENABLE_COMPILER_WARNINGS)
+  set_project_warnings(enable_compiler_warnings)
+  target_link_libraries(catkin_deps INTERFACE enable_compiler_warnings)
+endif (ENABLE_COMPILER_WARNINGS)
 
 ## Declare a C++ executables (targets).
 
