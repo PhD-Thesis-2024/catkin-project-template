@@ -47,7 +47,7 @@ Now, you're ready to get going!
 
 ### Tests
 
-Before continuing any further, make sure `CATKIN_ENABLE_TESTING` CMake variables is `ON` (it is by default).
+Before continuing any further, make sure `CATKIN_ENABLE_TESTING` CMake variable is `ON` (it is by default).
 
 You can run all catkin-integrated tests (unittest, GoogleTest) using this command: 
 ```shell
@@ -58,9 +58,9 @@ catkin test -t [run_tests]
 
 C++ tests can be written in two ways:
 - [GoogleTest](https://github.com/google/googletest) library (integrated into ROS).
-- [Catch2](https://github.com/catchorg/Catch2) framework (v3) (external dependency).
+- [Catch2 v3](https://github.com/catchorg/Catch2) framework (external dependency).
 
-It's really tricky to setup Catch2 with catkin. That's why we need to run them manually:
+It's really tricky to setup Catch2 with catkin. That's why we need to run tests manually:
 ```shell
 cd build/catkin_template
 ctest [-V]
