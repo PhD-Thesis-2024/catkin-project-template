@@ -9,7 +9,6 @@
 static constexpr auto kNodeName = "cpp_service_client";
 
 static constexpr auto kServiceName = "service";
-
 static constexpr auto kTimeoutSecs = double{5.0};
 
 
